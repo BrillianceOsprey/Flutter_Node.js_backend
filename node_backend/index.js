@@ -36,6 +36,7 @@ app.post("/api/add_product",(req,res)=> {
         "product": pdata,
      })
 },
+)
 // get api request
 app.get("/api/get_product",(req,res)=> {
       if(productData.length >0) {
@@ -50,4 +51,29 @@ app.get("/api/get_product",(req,res)=> {
            });
       }
 })
-)
+
+// update product
+app.put("/api/update/:id", (req,res)=> {
+      let id = req.params.id *1;
+      let productToUpdate = productData.find(p=> p.id ===id);
+      let index = productData.indexOf(productToUpdate);
+
+      productData[index] = req.body;
+      res.status(200).send({
+          'status': "success",
+          'message': "Product updated successfully"
+      })
+})
+// delete product
+app.post("/api/delete/:id", (req,res)=> {
+      let id = req.params.id *1;
+      let productToUpdate = productData.find(p=> p.id ===id);
+      let index = productData.indexOf(productToUpdate);
+
+      productData.splice(index,1);
+
+      res.status(200).send({
+          'status': "success",
+          'message': "Product updated successfully"
+      })
+})

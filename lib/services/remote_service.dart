@@ -55,8 +55,14 @@ class RemoteService {
         Logger.d('Response Data', data);
 
         return data
-            .map((e) =>
-                Product(name: e['pname'], price: e['pprice'], desc: e['pdesc']))
+            .map(
+              (e) => Product(
+                name: e['pname'],
+                price: e['pprice'],
+                desc: e['pdesc'],
+                id: e['id'].toString(),
+              ),
+            )
             .toList();
       } else {
         return [];
@@ -66,6 +72,46 @@ class RemoteService {
       Logger.e('Catched Error', e.toString());
 
       return [];
+    }
+  }
+
+  // update product api
+  Future updateProduct(id, body) async {
+    var dioUrl = "${baseUrl}update/$id";
+    final sBody = jsonEncode(body);
+    try {
+      Logger.clap('Remote Service get porduct url', dioUrl);
+      Logger.clap('Remote Service get porduct body', sBody);
+      var response = await dio.put(dioUrl, data: body);
+      Logger.clap('Remote Service get porduct response', response);
+
+      if (response.statusCode == 200) {
+        Logger.d('Response statuscode', response.data);
+      } else {
+        Logger.d('Response Else state', response.statusMessage);
+      }
+    } catch (e) {
+      Logger.e('Catched Error', e.toString());
+    }
+  }
+
+  // delete product api
+  Future deleteProduct(id, body) async {
+    var dioUrl = "${baseUrl}delete/$id";
+    final sBody = jsonEncode(body);
+    try {
+      Logger.clap('Remote Service get porduct url', dioUrl);
+      Logger.clap('Remote Service get porduct body', sBody);
+      var response = await dio.put(dioUrl, data: body);
+      Logger.clap('Remote Service get porduct response', response);
+
+      if (response.statusCode == 200) {
+        Logger.d('Response statuscode', response.data);
+      } else {
+        Logger.d('Response Else state', response.statusMessage);
+      }
+    } catch (e) {
+      Logger.e('Catched Error', e.toString());
     }
   }
 }

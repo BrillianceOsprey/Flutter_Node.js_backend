@@ -27,15 +27,16 @@ class _FetchDataState extends State<FetchData> {
               List<Product> pdataList = snapshot.data ?? [];
               Logger.i('List length', pdataList.length);
               return ListView.builder(
-                  itemCount: pdataList.length,
-                  itemBuilder: (cxt, idx) {
-                    return ListTile(
-                      leading: const Icon(Icons.storage),
-                      title: Text(pdataList[idx].desc),
-                      subtitle: Text(pdataList[idx].desc),
-                      trailing: Text(pdataList[idx].price),
-                    );
-                  });
+                itemCount: pdataList.length,
+                itemBuilder: (cxt, idx) {
+                  return ListTile(
+                    leading: const Icon(Icons.storage),
+                    title: Text(pdataList[idx].name),
+                    subtitle: Text(pdataList[idx].desc),
+                    trailing: Text(pdataList[idx].price),
+                  );
+                },
+              );
             }
           }),
     );

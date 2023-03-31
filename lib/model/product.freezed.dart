@@ -20,6 +20,7 @@ Product _$ProductFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Product {
+  String? get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get price => throw _privateConstructorUsedError;
   String get desc => throw _privateConstructorUsedError;
@@ -34,7 +35,7 @@ abstract class $ProductCopyWith<$Res> {
   factory $ProductCopyWith(Product value, $Res Function(Product) then) =
       _$ProductCopyWithImpl<$Res, Product>;
   @useResult
-  $Res call({String name, String price, String desc});
+  $Res call({String? id, String name, String price, String desc});
 }
 
 /// @nodoc
@@ -50,11 +51,16 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? name = null,
     Object? price = null,
     Object? desc = null,
   }) {
     return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -78,7 +84,7 @@ abstract class _$$_ProductCopyWith<$Res> implements $ProductCopyWith<$Res> {
       __$$_ProductCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, String price, String desc});
+  $Res call({String? id, String name, String price, String desc});
 }
 
 /// @nodoc
@@ -91,11 +97,16 @@ class __$$_ProductCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? name = null,
     Object? price = null,
     Object? desc = null,
   }) {
     return _then(_$_Product(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -116,11 +127,16 @@ class __$$_ProductCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Product implements _Product {
   const _$_Product(
-      {required this.name, required this.price, required this.desc});
+      {required this.id,
+      required this.name,
+      required this.price,
+      required this.desc});
 
   factory _$_Product.fromJson(Map<String, dynamic> json) =>
       _$$_ProductFromJson(json);
 
+  @override
+  final String? id;
   @override
   final String name;
   @override
@@ -130,7 +146,7 @@ class _$_Product implements _Product {
 
   @override
   String toString() {
-    return 'Product(name: $name, price: $price, desc: $desc)';
+    return 'Product(id: $id, name: $name, price: $price, desc: $desc)';
   }
 
   @override
@@ -138,6 +154,7 @@ class _$_Product implements _Product {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Product &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.price, price) || other.price == price) &&
             (identical(other.desc, desc) || other.desc == desc));
@@ -145,7 +162,7 @@ class _$_Product implements _Product {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, name, price, desc);
+  int get hashCode => Object.hash(runtimeType, id, name, price, desc);
 
   @JsonKey(ignore: true)
   @override
@@ -163,12 +180,15 @@ class _$_Product implements _Product {
 
 abstract class _Product implements Product {
   const factory _Product(
-      {required final String name,
+      {required final String? id,
+      required final String name,
       required final String price,
       required final String desc}) = _$_Product;
 
   factory _Product.fromJson(Map<String, dynamic> json) = _$_Product.fromJson;
 
+  @override
+  String? get id;
   @override
   String get name;
   @override
