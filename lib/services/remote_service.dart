@@ -50,17 +50,18 @@ class RemoteService {
 
       if (response.statusCode == 200) {
         Logger.d('Response statuscode', response.statusCode);
+        // Logger.clap('Response statuscode', response.data[0]);
         //
-        var data = response.data['products'] as List<dynamic>;
+        var data = response.data as List<dynamic>;
         Logger.d('Response Data', data);
 
         return data
             .map(
               (e) => Product(
                 name: e['pname'],
-                price: e['pprice'],
-                desc: e['pdesc'],
-                id: e['id'].toString(),
+                price: e['pprice'].toString(),
+                desc: e['pdesc'].toString(),
+                id: e['_id'].toString(),
               ),
             )
             .toList();
@@ -77,32 +78,41 @@ class RemoteService {
 
   // update product api
   Future updateProduct(id, body) async {
+    Logger.e('tag', 'tag');
     var dioUrl = "${baseUrl}update/$id";
     final sBody = jsonEncode(body);
-    try {
-      Logger.clap('Remote Service get porduct url', dioUrl);
-      Logger.clap('Remote Service get porduct body', sBody);
-      var response = await dio.put(dioUrl, data: body);
-      Logger.clap('Remote Service get porduct response', response);
+    var response = await dio.patch(dioUrl, data: body);
+    // try {
+    // Logger.clap('Remote Service get porduct url', response);
+    //   Logger.clap('Remote Service get porduct body', sBody);
 
-      if (response.statusCode == 200) {
-        Logger.d('Response statuscode', response.data);
-      } else {
-        Logger.d('Response Else state', response.statusMessage);
-      }
-    } catch (e) {
-      Logger.e('Catched Error', e.toString());
-    }
+    //   var response = await dio.patch(dioUrl, data: body);
+    //   Logger.clap('Remote Service get porduct response', response);
+
+    //   if (response.statusCode == 200) {
+    //     Logger.d('Response statuscode', response.data);
+    //   } else {
+    //     Logger.d('Response Else state', response.statusMessage);
+    //   }
+    // } on DioError catch (e) {
+    //   Logger.e('DioError', e.message);
+    // } catch (e) {
+    //   Logger.e('Catched Error', e.toString());
+    // }
   }
 
   // delete product api
-  Future deleteProduct(id, body) async {
+  Future deleteProduct(
+    id,
+  ) async {
     var dioUrl = "${baseUrl}delete/$id";
-    final sBody = jsonEncode(body);
+    // final sBody = jsonEncode(body);
     try {
       Logger.clap('Remote Service get porduct url', dioUrl);
-      Logger.clap('Remote Service get porduct body', sBody);
-      var response = await dio.put(dioUrl, data: body);
+      // Logger.clap('Remote Service get porduct body', sBody);
+      var response = await dio.post(
+        dioUrl,
+      );
       Logger.clap('Remote Service get porduct response', response);
 
       if (response.statusCode == 200) {

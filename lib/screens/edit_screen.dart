@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_nodejs_backend/core/logger.dart';
 
 import 'package:flutter_nodejs_backend/model/product.dart';
 import 'package:flutter_nodejs_backend/services/remote_service.dart';
@@ -50,7 +51,8 @@ class _EditScreenState extends State<EditScreen> {
               height: 20,
             ),
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
+                Logger.clap('Porduct id', widget.pdata.id);
                 var body = {
                   "id": widget.pdata.id,
                   "pname": _nameController.text,
@@ -58,7 +60,7 @@ class _EditScreenState extends State<EditScreen> {
                   "pdesc": _descController.text,
                 };
 
-                remoteService.updateProduct(widget.pdata.id, body);
+                await remoteService.updateProduct(widget.pdata.id, body);
               },
               child: const Text("Update Product"),
             ),

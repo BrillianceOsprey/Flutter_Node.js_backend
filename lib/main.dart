@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_nodejs_backend/forms/create.dart';
+import 'package:flutter_nodejs_backend/screens/delete_screen.dart';
 import 'package:flutter_nodejs_backend/screens/fetch_data.dart';
 import 'package:flutter_nodejs_backend/screens/update.dart';
 
@@ -68,7 +69,17 @@ class _MyHomePageState extends State<MyHomePage> {
                   );
                 },
                 child: const Text('Update')),
-            ElevatedButton(onPressed: () {}, child: const Text('Delete')),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (cxt) {
+                        return const DeletePage();
+                      },
+                    ),
+                  );
+                },
+                child: const Text('Delete')),
           ],
         ),
       ),

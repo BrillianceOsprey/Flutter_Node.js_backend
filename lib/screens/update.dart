@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_nodejs_backend/model/product.dart';
 import 'package:flutter_nodejs_backend/screens/edit_screen.dart';
 import 'package:flutter_nodejs_backend/services/remote_service.dart';
+
+import '../core/logger.dart';
 
 class UpdateScreen extends StatefulWidget {
   const UpdateScreen({super.key});
@@ -29,6 +29,7 @@ class _UpdateScreenState extends State<UpdateScreen> {
               );
             } else {
               List<Product> pdata = snapshot.data ?? [];
+              Logger.clap('Porduct id', pdata);
               return ListView.builder(
                   itemCount: pdata.length,
                   itemBuilder: (cxt, idx) {
